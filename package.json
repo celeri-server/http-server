@@ -1,6 +1,6 @@
 {
   "name": "@celeri/http-server",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "The main HTTP server library for Celeri",
   "main": "build/index.js",
   "scripts": {
