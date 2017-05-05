@@ -4,7 +4,7 @@
   "description": "The main HTTP server library for Celeri",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src --out-dir build"
   },
   "repository": {
     "type": "git",
@@ -22,13 +22,14 @@
     "url": "https://github.com/celeri-server/http-server/issues"
   },
   "homepage": "https://github.com/celeri-server/http-server#readme",
-  "license": "ISC",
   "devDependencies": {
     "eslint": "^3.19.0",
     "eslint-config-celeri": "^1.0.0"
   },
   "dependencies": {
+    "@celeri/middleware-pipeline": "^1.0.0",
     "@celeri/router": "^1.0.0",
-    "@celeri/middleware-pipeline": "^1.0.0"
+    "babel-cli": "^6.24.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.24.1"
   }
 }
