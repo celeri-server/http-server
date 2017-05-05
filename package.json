@@ -1,0 +1,34 @@
+{
+  "name": "@celeri/http-server",
+  "version": "1.0.0",
+  "description": "The main HTTP server library for Celeri",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/celeri-server/http-server.git"
+  },
+  "keywords": [
+    "celeri",
+    "http",
+    "server",
+    "middleware"
+  ],
+  "author": "James Brumond <james@jbrumond.me> (http://www.jbrumond.me)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/celeri-server/http-server/issues"
+  },
+  "homepage": "https://github.com/celeri-server/http-server#readme",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-celeri": "^1.0.0"
+  },
+  "dependencies": {
+    "@celeri/router": "^1.0.0",
+    "@celeri/middleware-pipeline": "^1.0.0"
+  }
+}
