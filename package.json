@@ -4,7 +4,8 @@
   "description": "The main HTTP server library for Celeri",
   "main": "build/index.js",
   "scripts": {
-    "build": "babel src --out-dir build"
+    "build": "babel src --out-dir build",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
