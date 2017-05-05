@@ -2,7 +2,7 @@
   "name": "@celeri/http-server",
   "version": "1.0.0",
   "description": "The main HTTP server library for Celeri",
-  "main": "src/index.js",
+  "main": "build/index.js",
   "scripts": {
     "build": "babel src --out-dir build"
   },
