@@ -5,7 +5,7 @@
   "main": "build/index.js",
   "scripts": {
     "build": "babel src --out-dir build",
-    "postinstall": "npm run build"
+    "postinstall": "postinstall-build build"
   },
   "repository": {
     "type": "git",
