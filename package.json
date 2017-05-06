@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "@celeri/middleware-pipeline": "^1.0.0",
-    "@celeri/router": "^1.0.0",
+    "@celeri/router": "^1.1.0",
     "postinstall-build": "^3.0.1"
   }
 }

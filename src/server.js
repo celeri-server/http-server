@@ -1,15 +1,14 @@
 
 import { parse as parseUrl } from 'url';
-import { Router } from '@celeri/router';
 import { MiddlewarePipeline } from '@celeri/middleware-pipeline';
 
 const props = new WeakMap();
 
 export class Server {
-	constructor(server) {
+	constructor(server, router) {
 		props.set(this, {
 			server: server,
-			router: new Router(),
+			router: router,
 			pipeline: new MiddlewarePipeline()
 		});
 
