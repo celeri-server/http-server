@@ -27,6 +27,10 @@ export class Server {
 		props.get(this).pipeline.catch(middleware);
 	}
 
+	route(method, route) {
+		return props.get(this).router.createRoute(method, route);
+	}
+
 	get(route) {
 		return props.get(this).router.createRoute('get', route);
 	}
