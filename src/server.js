@@ -21,10 +21,12 @@ export class Server {
 
 	use(middleware) {
 		props.get(this).pipeline.use(middleware);
+		return this;
 	}
 
 	catch(middleware) {
 		props.get(this).pipeline.catch(middleware);
+		return this;
 	}
 
 	route(method, route) {
