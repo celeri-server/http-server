@@ -64,7 +64,11 @@ export class Server {
 	router({ notFound }) {
 		return async ({ req, res }) => {
 			const { router } = props.get(this);
-			const { pathname } = parseUrl(req.url);
+			const { pathname, query } = parseUrl(req.url);
+			
+			req.pathname = pathname;
+			req.query = query;
+
 			const match = router.find(req.method, pathname);
 
 			if (! match) {
