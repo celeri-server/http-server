@@ -2,10 +2,11 @@
 import { Server } from './server';
 import { createServerFromConfig } from './create-server';
 import { RegexRouter } from '@celeri/router';
+import { Config } from './config';
 
 export { Server } from './server';
 
-export const createServer = (config = { }) => {
+export const createServer = (config: Config = { }) => {
 	const Router = config.router || RegexRouter;
 	const router = typeof Router === 'function' ? new Router() : Router;
 
@@ -14,5 +15,6 @@ export const createServer = (config = { }) => {
 	}
 
 	const server = createServerFromConfig(config);
+	
 	return new Server(server, router);
 };
