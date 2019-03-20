@@ -16,7 +16,7 @@ export interface RouterOptions {
 
 export interface Request extends IncomingMessage {
 	pathname?: string,
-	query?: string,
+	querystring?: string,
 	params?: {
 		[param: string]: string
 	},
@@ -99,7 +99,7 @@ export class Server {
 			const { pathname, query } = parseUrl(req.url);
 			
 			req.pathname = pathname;
-			req.query = query;
+			req.querystring = query;
 
 			const match = router.find(req.method, pathname);
 
