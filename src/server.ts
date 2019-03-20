@@ -10,11 +10,11 @@ interface PrivateStorage {
 	pipeline: MiddlewarePipeline<MiddlewareInput>
 }
 
-interface RouterOptions {
+export interface RouterOptions {
 	notFound: MiddlewareFunction<MiddlewareInput>
 }
 
-interface Request extends IncomingMessage {
+export interface Request extends IncomingMessage {
 	pathname?: string,
 	query?: string,
 	params?: {
@@ -23,11 +23,11 @@ interface Request extends IncomingMessage {
 	glob?: string
 }
 
-interface Response extends ServerResponse {
+export interface Response extends ServerResponse {
 	// 
 }
 
-interface MiddlewareInput extends RouterMiddwareInput {
+export interface MiddlewareInput extends RouterMiddwareInput {
 	req: Request,
 	res: Response
 }
