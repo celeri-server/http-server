@@ -1,10 +1,11 @@
 
-import { ServerOptions } from 'https';
-import { Router } from '@celeri/router';
 import { Server } from 'http';
+import { ServerOptions } from 'https';
+import { Router, Route } from '@celeri/router';
+import { MiddlewareInput } from './index';
 
 interface RouterConstructor {
-	new (): Router<any>;
+	new (): Router<Route<MiddlewareInput>, MiddlewareInput>;
 }
 
 export interface Config {

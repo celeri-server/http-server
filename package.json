@@ -24,7 +24,7 @@
   "homepage": "https://github.com/celeri-server/http-server#readme",
   "dependencies": {
     "@celeri/middleware-pipeline": "^2.0.2",
-    "@celeri/router": "^2.0.1",
+    "@celeri/router": "^2.0.2",
     "tslint": "^5.14.0",
     "typescript": "^3.3.4000"
   },

@@ -6,7 +6,7 @@ import { MiddlewarePipeline, MiddlewareFunction, ErrorMiddlewareFunction } from 
 
 interface PrivateStorage {
 	server: HttpServer,
-	router: Router<any>,
+	router: Router<Route<MiddlewareInput>, MiddlewareInput>,
 	pipeline: MiddlewarePipeline<MiddlewareInput>
 }
 
@@ -35,7 +35,7 @@ export interface MiddlewareInput extends RouterMiddwareInput {
 const props: WeakMap<Server, PrivateStorage> = new WeakMap();
 
 export class Server {
-	constructor(server: HttpServer, router: Router<any>) {
+	constructor(server: HttpServer, router: Router<Route<MiddlewareInput>, MiddlewareInput>) {
 		props.set(this, {
 			server: server,
 			router: router,
@@ -61,35 +61,35 @@ export class Server {
 		return this;
 	}
 
-	route(method: string, route: string) : Route {
+	route(method: string, route: string) {
 		return props.get(this).router.createRoute(method, route);
 	}
 
-	get(route: string) : Route {
+	get(route: string) {
 		return props.get(this).router.createRoute('get', route);
 	}
 
-	head(route: string) : Route {
+	head(route: string) {
 		return props.get(this).router.createRoute('head', route);
 	}
 
-	post(route: string) : Route {
+	post(route: string) {
 		return props.get(this).router.createRoute('post', route);
 	}
 
-	put(route: string) : Route {
+	put(route: string) {
 		return props.get(this).router.createRoute('put', route);
 	}
 
-	patch(route: string) : Route {
+	patch(route: string) {
 		return props.get(this).router.createRoute('patch', route);
 	}
 
-	delete(route: string) : Route {
+	delete(route: string) {
 		return props.get(this).router.createRoute('delete', route);
 	}
 
-	options(route: string) : Route {
+	options(route: string) {
 		return props.get(this).router.createRoute('options', route);
 	}
 
