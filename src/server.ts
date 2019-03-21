@@ -1,7 +1,7 @@
 
 import { parse as parseUrl } from 'url';
 import { Server as HttpServer, IncomingMessage, ServerResponse } from 'http';
-import { Router, RouterMiddwareInput } from '@celeri/router';
+import { Route, Router, RouterMiddwareInput } from '@celeri/router';
 import { MiddlewarePipeline, MiddlewareFunction, ErrorMiddlewareFunction } from '@celeri/middleware-pipeline';
 
 interface PrivateStorage {
@@ -51,43 +51,45 @@ export class Server {
 
 	use(middleware: MiddlewareFunction<MiddlewareInput>) {
 		props.get(this).pipeline.use(middleware);
+
 		return this;
 	}
 
 	catch(middleware: ErrorMiddlewareFunction<MiddlewareInput>) {
 		props.get(this).pipeline.catch(middleware);
+
 		return this;
 	}
 
-	route(method: string, route: string) {
+	route(method: string, route: string) : Route {
 		return props.get(this).router.createRoute(method, route);
 	}
 
-	get(route: string) {
+	get(route: string) : Route {
 		return props.get(this).router.createRoute('get', route);
 	}
 
-	head(route: string) {
+	head(route: string) : Route {
 		return props.get(this).router.createRoute('head', route);
 	}
 
-	post(route: string) {
+	post(route: string) : Route {
 		return props.get(this).router.createRoute('post', route);
 	}
 
-	put(route: string) {
+	put(route: string) : Route {
 		return props.get(this).router.createRoute('put', route);
 	}
 
-	patch(route: string) {
+	patch(route: string) : Route {
 		return props.get(this).router.createRoute('patch', route);
 	}
 
-	delete(route: string) {
+	delete(route: string) : Route {
 		return props.get(this).router.createRoute('delete', route);
 	}
 
-	options(route: string) {
+	options(route: string) : Route {
 		return props.get(this).router.createRoute('options', route);
 	}
 
@@ -108,7 +110,7 @@ export class Server {
 					await notFound({ req, res });
 				}
 
-				return ;
+				return;
 			}
 
 			req.params = match.params;
