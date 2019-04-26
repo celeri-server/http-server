@@ -6,36 +6,34 @@ import { MiddlewarePipeline, MiddlewareFunction, ErrorMiddlewareFunction } from 
 
 interface PrivateStorage {
 	server: HttpServer,
-	router: Router<Route<MiddlewareInput>, MiddlewareInput>,
-	pipeline: MiddlewarePipeline<MiddlewareInput>
+	router: Router<Route<MiddlewareInput<any>>, MiddlewareInput<any>>,
+	pipeline: MiddlewarePipeline<MiddlewareInput<any>>
 }
 
 export interface RouterOptions {
-	notFound: MiddlewareFunction<MiddlewareInput>
+	notFound: MiddlewareFunction<MiddlewareInput<any>>
 }
 
-export interface Request extends IncomingMessage {
-	pathname?: string,
-	querystring?: string,
-	params?: {
-		[param: string]: string
-	},
-	glob?: string
+export interface Request<P> extends IncomingMessage {
+	pathname?: string;
+	querystring?: string;
+	params?: P;
+	glob?: string;
 }
 
 export interface Response extends ServerResponse {
 	// 
 }
 
-export interface MiddlewareInput extends RouterMiddwareInput {
-	req: Request,
+export interface MiddlewareInput<P> extends RouterMiddwareInput {
+	req: Request<P>,
 	res: Response
 }
 
 const props: WeakMap<Server, PrivateStorage> = new WeakMap();
 
 export class Server {
-	constructor(server: HttpServer, router: Router<Route<MiddlewareInput>, MiddlewareInput>) {
+	constructor(server: HttpServer, router: Router<Route<MiddlewareInput<any>>, MiddlewareInput<any>>) {
 		props.set(this, {
 			server: server,
 			router: router,
@@ -49,54 +47,54 @@ export class Server {
 		return props.get(this).server;
 	}
 
-	use(middleware: MiddlewareFunction<MiddlewareInput>) {
+	use<P = void>(middleware: MiddlewareFunction<MiddlewareInput<P>>) {
 		props.get(this).pipeline.use(middleware);
 
 		return this;
 	}
 
-	catch(middleware: ErrorMiddlewareFunction<MiddlewareInput>) {
+	catch<P = void>(middleware: ErrorMiddlewareFunction<MiddlewareInput<P>>) {
 		props.get(this).pipeline.catch(middleware);
 
 		return this;
 	}
 
-	route(method: string, route: string) {
+	route<P = void>(method: string, route: string) : Route<MiddlewareInput<P>> {
 		return props.get(this).router.createRoute(method, route);
 	}
 
-	get(route: string) {
+	get<P = void>(route: string) : Route<MiddlewareInput<P>> {
 		return props.get(this).router.createRoute('get', route);
 	}
 
-	head(route: string) {
+	head<P = void>(route: string) : Route<MiddlewareInput<P>> {
 		return props.get(this).router.createRoute('head', route);
 	}
 
-	post(route: string) {
+	post<P = void>(route: string) : Route<MiddlewareInput<P>> {
 		return props.get(this).router.createRoute('post', route);
 	}
 
-	put(route: string) {
+	put<P = void>(route: string) : Route<MiddlewareInput<P>> {
 		return props.get(this).router.createRoute('put', route);
 	}
 
-	patch(route: string) {
+	patch<P = void>(route: string) : Route<MiddlewareInput<P>> {
 		return props.get(this).router.createRoute('patch', route);
 	}
 
-	delete(route: string) {
+	delete<P = void>(route: string) : Route<MiddlewareInput<P>> {
 		return props.get(this).router.createRoute('delete', route);
 	}
 
-	options(route: string) {
+	options<P = void>(route: string) : Route<MiddlewareInput<P>> {
 		return props.get(this).router.createRoute('options', route);
 	}
 
 	router(options: RouterOptions) {
 		const { notFound } = options;
 
-		return async ({ req, res }: MiddlewareInput) => {
+		return async ({ req, res }: MiddlewareInput<any>) => {
 			const { router } = props.get(this);
 			const { pathname, query } = parseUrl(req.url);
 			
@@ -120,7 +118,7 @@ export class Server {
 		};
 	}
 
-	onRequest(req: Request, res: Response) {
+	onRequest(req: Request<any>, res: Response) {
 		const { pipeline } = props.get(this);
 
 		pipeline.run({ req, res });
