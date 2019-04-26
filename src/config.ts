@@ -5,7 +5,7 @@ import { Router, Route } from '@celeri/router';
 import { MiddlewareInput } from './index';
 
 interface RouterConstructor {
-	new (): Router<Route<MiddlewareInput>, MiddlewareInput>;
+	new (): Router<Route<MiddlewareInput<any>>, MiddlewareInput<any>>;
 }
 
 export interface Config {
