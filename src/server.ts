@@ -5,7 +5,7 @@ import { Route, Router, RouterMiddwareInput } from '@celeri/router';
 import { MiddlewarePipeline, MiddlewareFunction, ErrorMiddlewareFunction } from '@celeri/middleware-pipeline';
 
 export interface RouterOptions {
-	notFound: MiddlewareFunction<MiddlewareInput<any>>
+	notFound: MiddlewareFunction<MiddlewareInput<any>>;
 }
 
 /**
@@ -19,6 +19,7 @@ export interface Request<P = void> extends IncomingMessage {
 	querystring?: string;
 	params?: P;
 	glob?: string;
+	host?: string;
 }
 
 /**
@@ -58,8 +59,11 @@ export class Server {
 	constructor(public readonly server: HttpServer, router: AnyRouter) {
 		this._router = router;
 		this._pipeline = new MiddlewarePipeline();
+		this._listen();
+	}
 
-		server.on('request', (req, res) => this.onRequest(req, res));
+	protected _listen() {
+		this.server.on('request', (req, res) => this.onRequest(req, res));
 	}
 
 	/**
@@ -242,6 +246,7 @@ export class Server {
 	 * the request and response objects into the top-level middleware pipeline.
 	 */
 	protected onRequest(req: Request<any>, res: Response) {
+		// FIXME: If this function rejects, nothing can catch it.
 		this._pipeline.run({ req, res });
 	}
 }

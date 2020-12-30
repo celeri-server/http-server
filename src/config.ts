@@ -4,7 +4,7 @@ import { ServerOptions } from 'https';
 import { Router, Route } from '@celeri/router';
 import { MiddlewareInput } from './index';
 
-interface RouterConstructor {
+export interface RouterConstructor {
 	new (): Router<Route<MiddlewareInput<any>>, MiddlewareInput<any>>;
 }
 
